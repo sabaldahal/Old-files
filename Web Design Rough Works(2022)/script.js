@@ -1,6 +1,31 @@
+    var allList = [];
+    fetch('/depart/eh/centers/ceg/community-engagement-core(draft)/articles-cec/').then(function (response) {
+        return response.text();
+    }).then(function (html) {
+    
+        var parser = new DOMParser();
+        var doc = parser.parseFromString(html, 'text/html');
+    
+        allList = doc.querySelectorAll('.container-blog .box-container .box');
+        console.log(allList);
+
+    
+    }).catch(function (err) {
+        // There was an error
+        console.warn('Something went wrong.', err);
+    });
+
+
+//fetch data ends here
+//
+//
+
+
+
     const searchValue = document.querySelector('#readfromhere');
-    const allList = document.querySelectorAll('.container-blog .box-container .box');
-    const putHere = document.querySelector('#getcontents');
+ //for use on the page where the data is located
+   //   const allList = document.querySelectorAll('.container-blog .box-container .box');
+   const putHere = document.querySelector('#getcontents');
 
 searchValue.addEventListener('keyup',(e) =>{
     const searchString = e.target.value.toLowerCase();
@@ -21,7 +46,7 @@ const displayResults = (data) => {
     var htmlString = data.map((one) => {
         return `
         <li>
-            <div class="result">
+  
                 <a href=#>
                     <div class="image">
                         <img src="${one.querySelector('img').getAttribute('src')}">
@@ -31,7 +56,7 @@ const displayResults = (data) => {
                         <p>${one.querySelector('.icons span').innerHTML}</p>
                     </div>
                 </a>
-            </div>
+
         </li>
         `;
     }).join('');
@@ -50,3 +75,4 @@ const displayResults = (data) => {
     
 
 };
+
